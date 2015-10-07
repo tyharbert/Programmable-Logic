@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1444012247 source:/Users/harbertt11/Documents/CodeBlocksProjects/TT_to_VHDL/main.cpp
+	<iostream>
+	<fstream>
+	"parser.hpp"
+
+1444015838 /Users/harbertt11/Documents/CodeBlocksProjects/TT_to_VHDL/parser.hpp
+	<string>
+	<fstream>
+	"IO.hpp"
+
+1444057388 source:/Users/harbertt11/Documents/CodeBlocksProjects/TT_to_VHDL/parser.cpp
+	<iostream>
+	<fstream>
+	<cmath>
+	"parser.hpp"
+
+1444009280 /Users/harbertt11/Documents/CodeBlocksProjects/TT_to_VHDL/IO.hpp
+	<string>
+
