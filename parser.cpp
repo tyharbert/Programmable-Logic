@@ -69,6 +69,8 @@ void Parser::generateVHDL(std::string name) {
     this->_outputFile << "ARCHITECTURE " << name << "_arch OF " << name << "_entity IS\nBEGIN\n";
     // each output
     for (int k=0; k<this->_outputCount; k++){
+        this->_outputFile << this->_vhdlOutputs[k].name << " <= ";
+
         // loop through all posible io for 1s count
         int onesTot = 0;
         for (int l=0; l < this->_possibleIO; l++){
@@ -76,9 +78,9 @@ void Parser::generateVHDL(std::string name) {
             if (this->_vhdlOutputs[k].values[l])
                 onesTot++;
         }
-        // if there is at least one 1, print output name
-        if (onesTot > 0)
-            this->_outputFile << this->_vhdlOutputs[k].name << " <= ";
+        // if there is not at least one 1, make the output expicitly 0
+        if (onesTot <= 0)
+            this->_outputFile << "'0';\n";
 
         // loop through all posible io
         int onesCount = 0;
