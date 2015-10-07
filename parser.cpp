@@ -78,30 +78,36 @@ void Parser::generateVHDL(std::string name) {
             if (this->_vhdlOutputs[k].values[l])
                 onesTot++;
         }
-        // if there is not at least one 1, make the output expicitly 0
+        // if all 0, make the output expicitly 0
         if (onesTot <= 0)
             this->_outputFile << "'0';\n";
+        // if all 1, make output explicitly 1
+        else if (onesTot == this->_possibleIO)
+            this->_outputFile << "'1';\n";
+        // if a combination, process truth table
+        else {
 
-        // loop through all posible io
-        int onesCount = 0;
-        for (int l=0; l < this->_possibleIO; l++){
-            // if an output is 1
-            if (this->_vhdlOutputs[k].values[l]){
-                onesCount++;
-                this->_outputFile << "( ";
-                // all inputs at that index
-                for (int m = 0; m<this->_inputCount; m++){
-                    if (!this->_vhdlInputs[m].values[l])
-                        this->_outputFile << "not ";
-                    this->_outputFile << this->_vhdlInputs[m].name;
-                    if (m != this->_inputCount-1)
-                        this->_outputFile << " and ";
+            // loop through all posible io
+            int onesCount = 0;
+            for (int l=0; l < this->_possibleIO; l++){
+                // if an output is 1
+                if (this->_vhdlOutputs[k].values[l]){
+                    onesCount++;
+                    this->_outputFile << "( ";
+                    // all inputs at that index
+                    for (int m = 0; m<this->_inputCount; m++){
+                        if (!this->_vhdlInputs[m].values[l])
+                            this->_outputFile << "not ";
+                        this->_outputFile << this->_vhdlInputs[m].name;
+                        if (m != this->_inputCount-1)
+                            this->_outputFile << " and ";
+                    }
+                    this->_outputFile << " )";
+                    if (onesCount != onesTot)
+                        this->_outputFile << " or ";
+                    else
+                        this->_outputFile << ";\n";
                 }
-                this->_outputFile << " )";
-                if (onesCount != onesTot)
-                    this->_outputFile << " or ";
-                else
-                    this->_outputFile << ";\n";
             }
         }
     }
