@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /Users/harbertt11/_The\ University\ of\ Akron/FALL\ 2015/Programmable\ Logic/HW2/bin 
+cmake /Users/harbertt11/_The\ University\ of\ Akron/FALL\ 2015/Programmable\ Logic/HW2/Bool_Mult
+make
